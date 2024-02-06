@@ -89,6 +89,13 @@
 }
 
 .main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #ECEEFE;
+  ;
 }
 
 .main-logo {
@@ -107,4 +114,20 @@
   justify-content: space-around;
   text-align: end;
   font-size: 18px;
+}
+
+.link-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 68px;
+}
+
+mat-card {
+  border-radius: 30px;
+  width: 606px;
+  height: 769px;
 }
