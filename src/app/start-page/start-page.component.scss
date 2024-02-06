@@ -1,0 +1,110 @@
+.start-animation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(#797ef3, #313ae5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100vh) translateX(-100vw) scale(0);
+  z-index: 99;
+  animation: slide-tl 3.5s;
+}
+
+.logo-container {
+  position: relative;
+  width: 696px;
+  height: 184px;
+}
+
+.logo {
+  position: absolute;
+  left: 0;
+  animation: logo-slide-left 1.2s;
+}
+
+.logo-text {
+  animation: show-logo-name 1.4s;
+  transform-origin: 0% 100%;
+  position: absolute;
+  right: 0;
+  top: 39.5px;
+  // opacity: 100%;
+}
+
+@keyframes logo-slide-left {
+  0% {
+    left: 240px;
+    opacity: 100%;
+  }
+
+  20% {
+    left: 240px;
+    opacity: 0%;
+  }
+
+  60% {
+    left: 240px;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes show-logo-name {
+  0% {
+    // opacity: 0%;
+    transform: scaleX(0);
+  }
+
+  75% {
+    // opacity: 0%;
+    transform: scaleX(0);
+  }
+
+  100% {
+    // opacity: 100%;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes slide-tl {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 100%;
+  }
+
+  60% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 100%;
+  }
+
+  100% {
+    transform: translateY(-100vh) translateX(-100vw) scale(0);
+    opacity: 0%;
+  }
+}
+
+.main-content {
+}
+
+.main-logo {
+  position: absolute;
+  top: 75px;
+  left: 75px;
+}
+
+.reegister-container {
+  height: 70px;
+  position: absolute;
+  top: 75px;
+  right: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: end;
+  font-size: 18px;
+}
