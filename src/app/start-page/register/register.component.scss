@@ -3,8 +3,8 @@
   top: 45px;
   left: 32px;
   &:hover {
-    background-color: #ECEEFE;
-    color: #535AF1;
+    background-color: #eceefe;
+    color: #535af1;
   }
 }
 
@@ -28,11 +28,85 @@ section {
     font-weight: 700;
     font-size: 46px;
     line-height: 120%;
-    color: #444DF2;
+    color: #444df2;
   }
 
   span {
     font-size: 20px;
     line-height: 120%;
+  }
+}
+
+.input-field {
+  width: 436px;
+  padding: 18px 32px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ECEEFE;
+
+  input {
+    width: 382px;
+    border: none;
+    background-color: #ECEEFE;
+    font-size: 18px;
+    line-height: 120%;
+    font-weight: 500;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  input {
+    width: 18px;
+    height: 18px;
+  }
+
+  span {
+    font-size: 16px;
+    line-height: 120%;
+    color: #42526E;
+
+    a {
+      font-size: 18px;
+      line-height: 120%;
+      text-decoration: none;
+      color: #797EF3;
+    }
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: end;
+  margin-top: 40px;
+}
+
+.next-btn {
+  padding: 12px 25px;
+  background-color: #444DF2;
+  border-radius: 25px;
+
+  a {
+    color: white;
+    font-size: 18px;
+    line-height: 120%;
+    font-weight: 500;
+    text-decoration: none;
   }
 }
