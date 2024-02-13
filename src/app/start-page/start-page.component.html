@@ -9,7 +9,7 @@
   <img src="assets/img/start_page/Logo_whit_text.png" class="main-logo">
   <div class="reegister-container">
     <span>Neu bei DABubble?</span>
-    <a href="">Konto erstellen</a>
+    <a [routerLink]="['/register']" routerLinkActive="router-link-active">Konto erstellen</a>
   </div>
   <div class="link-container">
     <a href="">Impressum</a>
@@ -17,7 +17,7 @@
   </div>
   <mat-card>
     <mat-card-content>
-      <app-login></app-login>
+      <router-outlet></router-outlet>
     </mat-card-content>
   </mat-card>
 </section>

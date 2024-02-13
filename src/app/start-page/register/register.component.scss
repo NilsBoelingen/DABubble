@@ -1,0 +1,38 @@
+.back-btn {
+  position: absolute;
+  top: 45px;
+  left: 32px;
+  &:hover {
+    background-color: #ECEEFE;
+    color: #535AF1;
+  }
+}
+
+section {
+  padding: 40px 53px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 120%;
+    color: #444DF2;
+  }
+
+  span {
+    font-size: 20px;
+    line-height: 120%;
+  }
+}
