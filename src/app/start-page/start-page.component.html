@@ -7,10 +7,12 @@
 </section>
 <section class="main-content">
   <img src="assets/img/start_page/Logo_whit_text.png" class="main-logo">
-  <div class="reegister-container">
-    <span>Neu bei DABubble?</span>
-    <a [routerLink]="['/register']" routerLinkActive="router-link-active">Konto erstellen</a>
-  </div>
+  @if (!registerPageActive) {
+    <div class="reegister-container">
+      <span>Neu bei DABubble?</span>
+      <a [routerLink]="['/register']" routerLinkActive="router-link-active">Konto erstellen</a>
+    </div>
+  }
   <div class="link-container">
     <a href="">Impressum</a>
     <a href="">Datenschutz</a>

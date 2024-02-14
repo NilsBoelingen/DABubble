@@ -8,15 +8,33 @@
 </a>
 <section>
   <h1>Wähle deinen Avatar</h1>
-  <div>
-    <img src="" />
+  <div class="choosen-avatar">
+    @if (currentAvatar.length <= 0) {
+    <div>
+      <img src="assets/img/start_page/avatar_default.png" class="avatarImg" />
+    </div>
+    } @else {
+    <div>
+      <img [src]="currentAvatar" class="avatarImg" (click)="currentAvatar = ''" />
+    </div>
+    }
     <h2>Frederick Beck</h2>
   </div>
-  <div>
+  <div class="avatars-container">
     <span>Aus der Liste wählen</span>
-    <div></div>
+    <div>
+      @for (avatar of avatars; track avatars; let i = $index) {
+      <div>
+        <img
+          [src]="avatar"
+          class="chooseImg"
+          (click)="currentAvatar = avatar"
+        />
+      </div>
+      }
+    </div>
   </div>
-  <div>
+  <div class="own-img">
     <span>eigenes Bild verwenden</span>
     <button>Datei hochladen</button>
   </div>

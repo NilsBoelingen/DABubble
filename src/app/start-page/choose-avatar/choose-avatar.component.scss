@@ -1,6 +1,6 @@
 .back-btn {
   position: absolute;
-  top: 45px;
+  top: 60px;
   left: 32px;
   &:hover {
     background-color: #eceefe;
@@ -11,7 +11,6 @@
 .btn-container {
   display: flex;
   justify-content: end;
-  margin-top: 40px;
 }
 
 .next-btn {
@@ -23,4 +22,117 @@
     padding: 12px 25px;
     background-color: #444DF2;
     border-radius: 25px;
+}
+
+section {
+  padding: 40px 67px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 120%;
+  color: #444DF2;
+  margin: 0;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 120%;
+  margin: 0;
+}
+
+span {
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.choosen-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  div {
+    width: 184px;
+    height: 184px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.avatarImg {
+  width: 168px;
+  height: 168px;
+  border-radius: 100%;
+
+  &:hover {
+    border: 8px solid #E6E6E6;
+  }
+}
+
+.avatars-container {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: 16px;
+  width: 100%;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}
+
+.chooseImg {
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+
+  &:hover {
+    border: 4px solid #E6E6E6;
+  }
+}
+
+.own-img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 16px;
+
+  button {
+    padding: 12px 25px;
+    border: 1px solid #797EF3;
+    border-radius: 25px;
+    background-color: white;
+    color: #797EF3;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 120%;
+
+    &:hover {
+      color: white;
+      background-color: #535AF1;
+    }
+  }
 }
