@@ -1,0 +1,26 @@
+.back-btn {
+  position: absolute;
+  top: 45px;
+  left: 32px;
+  &:hover {
+    background-color: #eceefe;
+    color: #535af1;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: end;
+  margin-top: 40px;
+}
+
+.next-btn {
+    color: white;
+    font-size: 18px;
+    line-height: 120%;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 12px 25px;
+    background-color: #444DF2;
+    border-radius: 25px;
+}

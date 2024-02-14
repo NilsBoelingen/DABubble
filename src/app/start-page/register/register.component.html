@@ -1,4 +1,4 @@
-<a mat-icon-button href="login" class="back-btn">
+<a mat-icon-button [routerLink]="['/login']" routerLinkActive="router-link-active" class="back-btn">
   <mat-icon>arrow_back</mat-icon>
 </a>
 <section>
@@ -42,19 +42,19 @@
         />
       </div>
       <div class="checkbox-container">
-        <input
-          mat-input
-          type="checkbox"
-          name="privacy-policy"
-          id="privacyPolicy"
-        />
+        <div class="checkbox-hover-circle">
+          <input
+            mat-input
+            type="checkbox"
+            name="privacy-policy"
+            id="privacyPolicy"
+          />
+        </div>
         <span>Ich stimme der <a href="">Datenschutzerklärung</a> zu</span>
       </div>
     </div>
     <div class="btn-container">
-      <div class="next-btn">
-        <a href="choose_avatar">Weiter</a>
-      </div>
+        <a [routerLink]="['/choose_avatar']" routerLinkActive="router-link-active" class="next-btn">Weiter</a>
     </div>
   </form>
 </section>
