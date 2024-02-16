@@ -2,6 +2,7 @@
   position: absolute;
   top: 60px;
   left: 32px;
+
   &:hover {
     background-color: #eceefe;
     color: #535af1;
@@ -22,9 +23,14 @@
     padding: 12px 25px;
     background-color: #444DF2;
     border-radius: 25px;
+
+    &:hover {
+      background-color: #797EF3;
+    }
 }
 
 section {
+  width: 486px;
   padding: 40px 67px;
   display: flex;
   flex-direction: column;

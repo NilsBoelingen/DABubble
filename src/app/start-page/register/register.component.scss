@@ -9,6 +9,7 @@
 }
 
 section {
+  width: 486px;
   padding: 40px 53px;
   text-align: center;
   display: flex;
@@ -154,4 +155,8 @@ section {
     padding: 12px 25px;
     background-color: #444DF2;
     border-radius: 25px;
+
+    &:hover {
+      background-color: #797EF3;
+    }
 }
