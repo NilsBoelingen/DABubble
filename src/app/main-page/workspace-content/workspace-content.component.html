@@ -1,0 +1,41 @@
+<body>
+  <section class="workspace">
+    <img src="assets/img/main-page/Workspace logo.png" />
+    <span>Code learning</span>
+    <button mat-icon-button>
+      <mat-icon>edit_square</mat-icon>
+    </button>
+  </section>
+  <section class="channel-container">
+    <div class="channel-header">
+      <button (click)="switchChannels()" class="open-channel">
+        <mat-icon>{{ channelsArrow }}</mat-icon>
+        <img src="assets/img/main-page/workspaces.png" /> Channels
+      </button>
+      <button class="add-channel">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="channels">
+      <button>#Entwicklerteam</button>
+    </div>
+    <div class="create-channel">
+      <button mat-icon-button>
+        <mat-icon>add_circle</mat-icon>
+        <span>Channel hinzufügen</span>
+      </button>
+    </div>
+  </section>
+  <section class="contacts-container">
+    <button (click)="switchContacts()">
+      <mat-icon>{{ contactsArrow }}</mat-icon>
+      <span><img src="assets/img/main-page/workspaces.png" /> Channels</span>
+    </button>
+    <div class="contacts">
+      <div>
+        <img src="assets/img/main-page/avatar_1.png" />
+        <span>Max Mustermann</span>
+      </div>
+    </div>
+  </section>
+</body>

@@ -1,9 +1,20 @@
 <header>
-  <img src="assets/img/main-page/Logo_whit_text.png">
-  <input type="text" placeholder="Suchen">
-  <div mat-button [matMenuTriggerFor]="menu">
+  <img src="assets/img/main-page/Logo_whit_text.png" />
+  <div class="search-container">
+    <div class="search-field">
+      <input
+        mat-input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Code learning durchsuchen"
+      />
+      <mat-icon>search</mat-icon>
+    </div>
+  </div>
+  <div class="profil-menu-trigger" mat-button [matMenuTriggerFor]="menu">
     <h1>Name</h1>
-    <img src="assets/img/main-page/avatar_1.png">
+    <img src="assets/img/main-page/avatar_1.png" />
     <mat-icon>arrow_drop_down</mat-icon>
   </div>
   <mat-menu #menu="matMenu">
@@ -16,5 +27,21 @@
   </mat-menu>
 </header>
 <body>
-
+  <section class="workspace-container">
+    <button (click)="switchWorkspace()">
+      Workspace-Menü schließen <img src="assets/img/main-page/Group 2.png" />
+    </button>
+    <div class="workspace-content-container" *ngIf="workspaceOpen">
+      <mat-card>
+        <app-workspace-content></app-workspace-content>
+      </mat-card>
+    </div>
+  </section>
+  <section class="main-chat" [style.width]="matCardWidth">
+    <mat-card>
+        <mat-card-content>
+            <app-main-chat-content></app-main-chat-content>
+        </mat-card-content>
+    </mat-card>
+  </section>
 </body>

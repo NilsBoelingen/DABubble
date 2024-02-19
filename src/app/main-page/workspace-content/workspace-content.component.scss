@@ -1,0 +1,100 @@
+body {
+  width: calc(100% - 60px);
+  height: calc(100% - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 32px 30px;
+  gap: 25px;
+}
+
+.workspace {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 60px;
+    height: 60px;
+  }
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  button {
+    font-size: 24px;
+  }
+}
+
+.channel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.open-channel {
+  width: 176px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 120%;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.add-channel {
+  background-color: #fff;
+  border: none;
+  font-size: 24px;
+}
+
+.channels {
+  padding-left: 25px;
+  button {
+    background-color: #ECEEFE;
+    border: none;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #535AF1;
+  }
+}
+
+.contacts-container {
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+  }
+
+  button {
+    background-color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    width: 261px;
+    padding: 4px 20px;
+  }
+}
