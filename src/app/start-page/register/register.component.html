@@ -9,7 +9,7 @@
       DABubble-Konto.</span
     >
   </div>
-  <form>
+  <form (submit)="createNewUser()">
     <div class="input-container">
       <div class="input-field">
         <mat-icon>person</mat-icon>
@@ -19,6 +19,7 @@
           name="name"
           id="name"
           placeholder="Vorname und Nachname"
+          [(ngModel)]="newUser.name"
         />
       </div>
       <div class="input-field">
@@ -29,6 +30,7 @@
           name="email"
           id="email"
           placeholder="beispielname@email.com"
+          [(ngModel)]="newUser.email"
         />
       </div>
       <div class="input-field">
@@ -39,6 +41,7 @@
           name="password"
           id="password"
           placeholder="Passwort"
+          [(ngModel)]="newUser.password"
         />
       </div>
       <div class="checkbox-container">
@@ -54,7 +57,7 @@
       </div>
     </div>
     <div class="btn-container">
-        <a [routerLink]="['/choose_avatar']" routerLinkActive="router-link-active" class="next-btn">Weiter</a>
+        <button type="submit" class="next-btn">Weiter</button>
     </div>
   </form>
 </section>
