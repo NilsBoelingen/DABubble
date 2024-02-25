@@ -15,7 +15,7 @@
     </div>
     } @else {
     <div>
-      <img [src]="currentAvatar" class="avatarImg" (click)="currentAvatar = ''" />
+      <img [src]="currentAvatar" class="avatarImg" (click)="currentAvatar = 'assets/img/start_page/avatar_default.png'" />
     </div>
     }
     <h2>Frederick Beck</h2>
@@ -40,10 +40,5 @@
   </div>
 </section>
 <div class="btn-container">
-  <a
-    [routerLink]="['/login']"
-    routerLinkActive="router-link-active"
-    class="next-btn"
-    >Weiter</a
-  >
+  <button class="next-btn" (click)="updateUser()">Weiter</button>
 </div>

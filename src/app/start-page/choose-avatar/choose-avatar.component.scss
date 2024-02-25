@@ -15,18 +15,19 @@
 }
 
 .next-btn {
-    color: white;
-    font-size: 18px;
-    line-height: 120%;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 12px 25px;
-    background-color: #444DF2;
-    border-radius: 25px;
+  color: white;
+  font-size: 18px;
+  line-height: 120%;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 25px;
+  background-color: #444DF2;
+  border-radius: 25px;
+  border: none;
 
-    &:hover {
-      background-color: #797EF3;
-    }
+  &:hover {
+    background-color: #797EF3;
+  }
 }
 
 section {

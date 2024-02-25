@@ -8,16 +8,31 @@ import { Auth, updateProfile } from '@angular/fire/auth';
 })
 export class FirebaseAuthService {
   auth: Auth = inject(Auth);
-  userJson: any;
+
+  newUser: NewUser = {
+    name: '',
+    email: '',
+    password: '',
+    img: '',
+  }
 
   constructor() {}
 
-  createUser(newUser: NewUser) {
+  updateUserInfo(name: string, email: string, password: string) {
+    this.newUser.name = name;
+    this.newUser.email = email;
+    this.newUser.password = password;
+  }
+
+  updateUserImg(img: string) {
+    this.newUser.img = img;
+  }
+
+  createUser() {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+    createUserWithEmailAndPassword(auth, this.newUser.email, this.newUser.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        this.userJson = user.toJSON();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -25,13 +40,11 @@ export class FirebaseAuthService {
       });
       if (auth.currentUser) {
     updateProfile(auth.currentUser, {
-      displayName: newUser.name,
+      displayName: this.newUser.name,
+      photoURL: this.newUser.img,
     })
       .then(() => {
         const user = auth.currentUser;
-        this.userJson = user!.toJSON();
-        console.log(this.userJson);
-
       })
       .catch((error) => {
       });

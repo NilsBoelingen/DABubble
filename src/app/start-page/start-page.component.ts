@@ -15,4 +15,5 @@ import { RegisterComponent } from './register/register.component';
 export class StartPageComponent {
 
   registerPageActive: boolean = false;
+
 }
