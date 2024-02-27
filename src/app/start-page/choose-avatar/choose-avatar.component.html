@@ -9,15 +9,9 @@
 <section>
   <h1>Wähle deinen Avatar</h1>
   <div class="choosen-avatar">
-    @if (currentAvatar.length <= 0) {
     <div>
-      <img src="assets/img/start_page/avatar_default.png" class="avatarImg" />
+      <img [src]="currentAvatar" class="avatarImg"/>
     </div>
-    } @else {
-    <div>
-      <img [src]="currentAvatar" class="avatarImg" (click)="currentAvatar = 'assets/img/start_page/avatar_default.png'" />
-    </div>
-    }
     <h2>Frederick Beck</h2>
   </div>
   <div class="avatars-container">
@@ -36,7 +30,8 @@
   </div>
   <div class="own-img">
     <span>eigenes Bild verwenden</span>
-    <button class="button"><input type="file"></button>
+    <input type="file" accept="image/*" style="display: none;" (change)="onFileChange($event)" #fileInput>
+    <button class="button" (click)="chooseFile()">Datei hochladen</button>
   </div>
 </section>
 <div class="btn-container">

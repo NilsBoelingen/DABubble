@@ -20,6 +20,7 @@
           id="name"
           placeholder="Vorname und Nachname"
           [(ngModel)]="name"
+          required
         />
       </div>
       <div class="input-field">
@@ -31,17 +32,19 @@
           id="email"
           placeholder="beispielname@email.com"
           [(ngModel)]="email"
+          required
         />
       </div>
       <div class="input-field">
         <mat-icon>lock</mat-icon>
         <input
           mat-input
-          type="text"
+          type="password"
           name="password"
           id="password"
           placeholder="Passwort"
           [(ngModel)]="password"
+          required
         />
       </div>
       <div class="checkbox-container">
@@ -51,6 +54,7 @@
             type="checkbox"
             name="privacy-policy"
             id="privacyPolicy"
+            required
           />
         </div>
         <span>Ich stimme der <a href="">Datenschutzerklärung</a> zu</span>
