@@ -157,6 +157,14 @@ section {
     border-radius: 25px;
     border: none;
 
+    &:disabled {
+      background-color: #686868;
+
+      &:hover {
+        background-color: #686868;
+      }
+    }
+
     &:hover {
       background-color: #797EF3;
     }

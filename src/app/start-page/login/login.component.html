@@ -16,16 +16,18 @@
           name="name"
           id="name"
           placeholder="Vorname und Nachname"
+          [(ngModel)]="email"
         />
       </div>
       <div class="input-field">
         <mat-icon>lock</mat-icon>
         <input
           mat-input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Vorname und Nachname"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Passwort"
+          [(ngModel)]="password"
         />
       </div>
       <a [routerLink]="['/forgot_password']" >Passwort vergessen?</a>
@@ -39,7 +41,7 @@
       <button class="google-btn"><img src="assets/img/start_page/Google.png">Anmelden mit Google</button>
     </div>
     <div class="btn-container">
-      <button>Anmelden</button>
+      <button (click)="login()">Anmelden</button>
       <button>Gäste-Login</button>
     </div>
   </form>

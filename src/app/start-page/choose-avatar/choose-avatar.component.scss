@@ -25,6 +25,14 @@
   border-radius: 25px;
   border: none;
 
+  &:disabled {
+    background-color: #686868;
+
+    &:hover {
+      background-color: #686868;
+    }
+  }
+
   &:hover {
     background-color: #797ef3;
   }
@@ -139,6 +147,17 @@ span {
     line-height: 120%;
     cursor: pointer;
 
+    &:disabled {
+      border: 1px solid #686868;
+      color: #686868;
+
+      &:hover {
+        border: 1px solid #686868;
+        color: #686868;
+        background-color: white;
+      }
+    }
+
     &::file-selector-button {
       display: none;
     }
@@ -148,4 +167,9 @@ span {
       background-color: #535AF1;
     }
   }
+}
+
+mat-progress-bar {
+  position: absolute;
+  top: 0;
 }

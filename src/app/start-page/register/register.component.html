@@ -20,7 +20,6 @@
           id="name"
           placeholder="Vorname und Nachname"
           [(ngModel)]="auth.newUser.name"
-          required
           [formControl]="nameForm"
         />
       </div>
@@ -33,7 +32,6 @@
           id="email"
           placeholder="beispielname@email.com"
           [(ngModel)]="auth.newUser.email"
-          required
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
           [formControl]="emailForm"
         />
@@ -47,7 +45,6 @@
           id="password"
           placeholder="Passwort"
           [(ngModel)]="auth.newUser.password"
-          required
           [formControl]="passwordForm"
         />
       </div>
@@ -58,7 +55,6 @@
             type="checkbox"
             name="privacy-policy"
             id="privacyPolicy"
-            required
             [formControl]="checkboxForm"
           />
         </div>
