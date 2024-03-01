@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { WorkspaceContentComponent } from './workspace-content/workspace-content.component';
 import { CommonModule } from '@angular/common';
 import { MainChatContentComponent } from './main-chat-content/main-chat-content.component';
+import { FirebaseAuthService } from '../services/firebase-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -16,8 +18,12 @@ import { MainChatContentComponent } from './main-chat-content/main-chat-content.
   styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent {
+  auth = inject(FirebaseAuthService);
+
   matCardWidth = 'calc(100% - 386px - 40px)';
   workspaceOpen = true;
+
+  constructor(private router: Router) {}
 
   switchWorkspace() {
     if (this.workspaceOpen) {
@@ -27,5 +33,10 @@ export class MainPageComponent {
       this.workspaceOpen = true;
       this.matCardWidth = 'calc(100% - 386px - 40px)';
     }
+  }
+
+  async logout() {
+    await this.auth.signOut();
+    this.router.navigateByUrl('/')
   }
 }

@@ -7,16 +7,7 @@ import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { FirebaseSorageService } from '../../services/firebase-sorage.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DialogComponent } from '../dialog/dialog.component';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
-} from '@angular/material/dialog';
-import { DialogRef } from '@angular/cdk/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface DialogData {
   headline: string;

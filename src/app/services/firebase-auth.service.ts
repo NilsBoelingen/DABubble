@@ -9,6 +9,7 @@ import {
   Auth,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from '@angular/fire/auth';
 
@@ -67,34 +68,52 @@ export class FirebaseAuthService {
       .then((userCredential) => {
         const user = userCredential.user;
         this.currentUser = user.toJSON();
+        this.loginMessage = 'Login erfolgreich!';
       })
       .catch((error) => {
+        this.loginMessage = 'Email oder Passwort falsch!';
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode + errorMessage);
       });
   }
 
-  signInWhitGoogle() {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential!.accessToken;
-        const user = result.user;
-        this.currentUser = user.toJSON();
-        console.log(this.currentUser.displayName);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+  async signInWithGoogle() {
+    return new Promise<void>((resolve, reject) => {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential!.accessToken;
+          const user = result.user;
+          this.currentUser = user.toJSON();
+          console.log(this.currentUser.displayName);
+          this.loginMessage = 'Login erfolgreich!';
+          resolve(); // Aufrufen der resolve-Funktion, um anzuzeigen, dass der Vorgang abgeschlossen ist
+        })
+        .catch((error) => {
+          // Fehlerbehandlung
+          this.loginMessage = 'Login nicht möglich!';
+          reject(error); // Aufrufen der reject-Funktion, um anzuzeigen, dass ein Fehler aufgetreten ist
+        });
+    });
+  }
+
+  async signOut() {
+    return new Promise<void>((resolve, reject) => {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          this.currentUser = '';
+          // Sign-out successful.
+          resolve();
+        })
+        .catch((error: Error) => {
+          let errorMessage = error;
+          // An error happened.
+          reject(error);
+        });
+    });
   }
 }

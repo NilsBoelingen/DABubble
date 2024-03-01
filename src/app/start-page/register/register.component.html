@@ -1,4 +1,9 @@
-<a mat-icon-button [routerLink]="['/login']" routerLinkActive="router-link-active" class="back-btn">
+<a
+  mat-icon-button
+  [routerLink]="['/login']"
+  routerLinkActive="router-link-active"
+  class="back-btn"
+>
   <mat-icon>arrow_back</mat-icon>
 </a>
 <section>
@@ -11,55 +16,86 @@
   </div>
   <form (submit)="updateUser()">
     <div class="input-container">
-      <div class="input-field">
-        <mat-icon>person</mat-icon>
-        <input
-          mat-input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Vorname und Nachname"
-          [formControl]="nameForm"
-        />
-      </div>
-      <div class="input-field">
-        <mat-icon>email</mat-icon>
-        <input
-          mat-input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="beispielname@email.com"
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-          [formControl]="emailForm"
-        />
-      </div>
-      <div class="input-field">
-        <mat-icon>lock</mat-icon>
-        <input
-          mat-input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Passwort"
-          [formControl]="passwordForm"
-        />
-      </div>
-      <div class="checkbox-container">
-        <div class="checkbox-hover-circle">
+      <div class="input-field-container">
+        <div class="input-field">
+          <mat-icon>person</mat-icon>
           <input
             mat-input
-            type="checkbox"
-            name="privacy-policy"
-            id="privacyPolicy"
-            [formControl]="checkboxForm"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Vorname und Nachname"
+            [formControl]="nameForm"
           />
         </div>
-        <span>Ich stimme der <a href="">Datenschutzerklärung</a> zu</span>
+        @if (nameForm.invalid) {
+          <span class="form-error">{{ getErrorMessage('name') }}</span>
+          }
+      </div>
+      <div class="input-field-container">
+        <div class="input-field">
+          <mat-icon>email</mat-icon>
+          <input
+            mat-input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="beispielname@email.com"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            [formControl]="emailForm"
+          />
+        </div>
+        @if (emailForm.invalid) {
+          <span class="form-error">{{ getErrorMessage('email') }}</span>
+          }
+      </div>
+      <div class="input-field-container">
+        <div class="input-field">
+          <mat-icon>lock</mat-icon>
+          <input
+            mat-input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Passwort"
+            [formControl]="passwordForm"
+          />
+        </div>
+        @if (passwordForm.invalid) {
+          <span class="form-error">Bitte gib ein Passwort ein!</span>
+          }
+      </div>
+      <div class="input-field-container">
+        <div class="checkbox-container">
+          <div class="checkbox-hover-circle">
+            <input
+              mat-input
+              type="checkbox"
+              name="privacy-policy"
+              id="privacyPolicy"
+              [formControl]="checkboxForm"
+            />
+          </div>
+          <span>Ich stimme der <a href="">Datenschutzerklärung</a> zu</span>
+        </div>
+        @if (checkboxForm.invalid) {
+          <span class="form-error">Bitte akzeptiere die Datenschutzerklärung!</span>
+          }
       </div>
     </div>
     <div class="btn-container">
-        <button type="submit" class="next-btn" [disabled]="nameForm.invalid || emailForm.invalid || passwordForm.invalid || checkboxForm.invalid">Weiter</button>
+      <button
+        type="submit"
+        class="next-btn"
+        [disabled]="
+          nameForm.invalid ||
+          emailForm.invalid ||
+          passwordForm.invalid ||
+          checkboxForm.invalid
+        "
+      >
+        Weiter
+      </button>
     </div>
   </form>
 </section>
