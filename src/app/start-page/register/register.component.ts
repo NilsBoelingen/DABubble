@@ -27,6 +27,9 @@ export class RegisterComponent {
   constructor(private router: Router) {}
 
   updateUser() {
+    this.auth.newUser.name = this.nameForm.value!;
+    this.auth.newUser.email = this.emailForm.value!;
+    this.auth.newUser.password = this.passwordForm.value!;
     this.router.navigateByUrl('/choose_avatar');
   }
 }

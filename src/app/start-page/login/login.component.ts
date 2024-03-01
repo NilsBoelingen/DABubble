@@ -4,26 +4,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { sendPasswordResetEmail } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule, MatIconModule, MatFormFieldModule, RouterModule, CommonModule, FormsModule],
+  imports: [MatInputModule, MatIconModule, MatFormFieldModule, RouterModule, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   auth = inject(FirebaseAuthService);
 
-  email: string = '';
-  password: string = '';
+  email = new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")])
+  password = new FormControl('', [Validators.required])
 
   login() {
-    console.log(this.email, this.password);
-
-    this.auth.signIn(this.email, this.password)
+    this.auth.signIn(this.email.value!, this.password.value!)
   }
 }
