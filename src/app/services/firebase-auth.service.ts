@@ -11,6 +11,9 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  connectAuthEmulator,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -29,6 +32,8 @@ export class FirebaseAuthService {
   loginMessage: string = '';
 
   currentUser: any = '';
+
+  fromPasswords: boolean = false;
 
   constructor() {}
 
@@ -115,5 +120,9 @@ export class FirebaseAuthService {
           reject(error);
         });
     });
+  }
+
+  resetPassword(email: string): Promise<void> {
+    return sendPasswordResetEmail(this.auth, email)
   }
 }

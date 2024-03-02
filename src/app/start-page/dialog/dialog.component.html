@@ -1,1 +1,6 @@
-<h1>{{ data.headline }}</h1>
+<div>
+  @if (auth.fromPasswords) {
+  <img src="assets/img/start_page/send.png" />
+  }
+  <h1>{{ data.headline }}</h1>
+</div>
