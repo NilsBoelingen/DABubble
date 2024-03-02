@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { MatCardModule } from '@angular/material/card';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 
@@ -14,6 +14,6 @@ import { RegisterComponent } from './register/register.component';
 })
 export class StartPageComponent {
 
-  registerPageActive: boolean = false;
+  constructor(public router: Router) {}
 
 }

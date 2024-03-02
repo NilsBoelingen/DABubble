@@ -14,6 +14,7 @@ import {
   connectAuthEmulator,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  sendEmailVerification,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -62,6 +63,7 @@ export class FirebaseAuthService {
       })
         .then(() => {
           const user = auth.currentUser;
+          sendEmailVerification(user!)
         })
         .catch((error) => {});
     }
