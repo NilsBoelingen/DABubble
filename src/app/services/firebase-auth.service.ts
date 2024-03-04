@@ -16,12 +16,14 @@ import {
   confirmPasswordReset,
   sendEmailVerification,
 } from '@angular/fire/auth';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthService {
   auth: Auth = inject(Auth);
+  firestore = inject(FirestoreService);
 
   newUser: NewUser = {
     name: '',
@@ -35,6 +37,9 @@ export class FirebaseAuthService {
   currentUser: any = '';
 
   fromPasswords: boolean = false;
+
+  firstName: string = '';
+  lastName: string = '';
 
   constructor() {}
 
@@ -51,22 +56,30 @@ export class FirebaseAuthService {
     )
       .then((userCredential) => {
         const user = userCredential.user;
+        updateProfile(user, {
+          displayName: this.newUser.name,
+          photoURL: this.newUser.img,
+        })
+          .then(() => {
+            const user = auth.currentUser;
+            sendEmailVerification(user!);
+            this.getSingleName();
+            this.firestore.addUser(this.newUser.email, this.firstName, this.lastName);
+          })
+          .catch((error) => {});
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    if (auth.currentUser) {
-      updateProfile(auth.currentUser, {
-        displayName: this.newUser.name,
-        photoURL: this.newUser.img,
-      })
-        .then(() => {
-          const user = auth.currentUser;
-          sendEmailVerification(user!)
-        })
-        .catch((error) => {});
-    }
+  }
+
+  getSingleName() {
+    let fullName = this.newUser.name;
+    let names = fullName.split(' ');
+    this.lastName = names.pop() || '';
+    this.firstName = names.join(' ');
+    console.log('Vorname=', this.firstName, 'Nachname=', this.lastName);
   }
 
   signIn(email: string, password: string) {
@@ -125,6 +138,16 @@ export class FirebaseAuthService {
   }
 
   resetPassword(email: string): Promise<void> {
-    return sendPasswordResetEmail(this.auth, email)
+    return new Promise<void>((resolve, reject) => {
+      sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        resolve();
+      })
+      .catch((error: Error) => {
+        console.log(error);
+
+        reject(error);
+      });
+    });
   }
 }

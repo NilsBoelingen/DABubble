@@ -57,6 +57,9 @@ export class ForgotPasswordComponent {
           }, 2000);
         })
         .catch((error) => {
+          if (error.code === 'auth/user-not-found') {
+            alert('Nutzer nicht gefunden')
+          }
           // Fehler beim Senden der Email
           console.error('Fehler beim Senden der Email:', error);
         });
