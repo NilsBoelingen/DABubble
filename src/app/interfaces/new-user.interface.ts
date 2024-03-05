@@ -2,5 +2,5 @@ export interface NewUser {
   name: string;
   email: string;
   password: string;
-  img: string;
+  photoURL: string;
 }

@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    DialogComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -43,13 +46,22 @@ export class RegisterComponent {
   passwordForm = new FormControl('', [Validators.required]);
   checkboxForm = new FormControl('', [Validators.requiredTrue]);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   updateUser() {
-    this.auth.newUser.name = this.nameForm.value!;
-    this.auth.newUser.email = this.emailForm.value!;
-    this.auth.newUser.password = this.passwordForm.value!;
-    this.router.navigateByUrl('/choose_avatar');
+    if (this.auth.checkEmailMatch(this.emailForm.value!)) {
+      this.auth.loginMessage = 'Die Email-Adresse existiert bereits!'
+      this.openDialog();
+      setTimeout(() => {
+        this.dialog.closeAll();
+        this.router.navigateByUrl('/login');
+      }, 2000);
+    } else {
+      this.auth.newUser.name = this.nameForm.value!;
+      this.auth.newUser.email = this.emailForm.value!;
+      this.auth.newUser.password = this.passwordForm.value!;
+      this.router.navigateByUrl('/choose_avatar');
+    }
   }
 
   getErrorMessage(formControlName: string) {
@@ -68,5 +80,11 @@ export class RegisterComponent {
         ? 'Bitte gib mendestens 3 Zeichen ein!'
         : '';
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {headline: this.auth.loginMessage},
+    });
   }
 }

@@ -29,7 +29,7 @@ export class FirebaseAuthService {
     name: '',
     email: '',
     password: '',
-    img: '',
+    photoURL: '',
   };
 
   loginMessage: string = '';
@@ -41,10 +41,12 @@ export class FirebaseAuthService {
   firstName: string = '';
   lastName: string = '';
 
+  emailExists: boolean = false;
+
   constructor() {}
 
   updateUserImg(img: string) {
-    this.newUser.img = img;
+    this.newUser.photoURL = img;
   }
 
   createUser() {
@@ -58,13 +60,13 @@ export class FirebaseAuthService {
         const user = userCredential.user;
         updateProfile(user, {
           displayName: this.newUser.name,
-          photoURL: this.newUser.img,
+          photoURL: this.newUser.photoURL,
         })
           .then(() => {
             const user = auth.currentUser;
             sendEmailVerification(user!);
-            this.getSingleName();
-            this.firestore.addUser(this.newUser.email, this.firstName, this.lastName);
+            this.getSingleName(user!.displayName);
+            this.firestore.addUser(this.newUser, this.firstName, this.lastName);
           })
           .catch((error) => {});
       })
@@ -74,12 +76,10 @@ export class FirebaseAuthService {
       });
   }
 
-  getSingleName() {
-    let fullName = this.newUser.name;
-    let names = fullName.split(' ');
+  getSingleName(fullName: string | undefined | null) {
+    let names = fullName!.split(' ');
     this.lastName = names.pop() || '';
     this.firstName = names.join(' ');
-    console.log('Vorname=', this.firstName, 'Nachname=', this.lastName);
   }
 
   signIn(email: string, password: string) {
@@ -108,14 +108,20 @@ export class FirebaseAuthService {
           const token = credential!.accessToken;
           const user = result.user;
           this.currentUser = user.toJSON();
-          console.log(this.currentUser.displayName);
+          if (!this.checkEmailMatch(this.currentUser.email)) {
+            this.getSingleName(this.currentUser.displayName);
+            this.firestore.addUser(
+              this.currentUser,
+              this.firstName,
+              this.lastName
+            );
+          }
           this.loginMessage = 'Login erfolgreich!';
-          resolve(); // Aufrufen der resolve-Funktion, um anzuzeigen, dass der Vorgang abgeschlossen ist
+          resolve();
         })
         .catch((error) => {
-          // Fehlerbehandlung
           this.loginMessage = 'Login nicht möglich!';
-          reject(error); // Aufrufen der reject-Funktion, um anzuzeigen, dass ein Fehler aufgetreten ist
+          reject(error);
         });
     });
   }
@@ -126,12 +132,10 @@ export class FirebaseAuthService {
       signOut(auth)
         .then(() => {
           this.currentUser = '';
-          // Sign-out successful.
           resolve();
         })
         .catch((error: Error) => {
           let errorMessage = error;
-          // An error happened.
           reject(error);
         });
     });
@@ -140,14 +144,24 @@ export class FirebaseAuthService {
   resetPassword(email: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       sendPasswordResetEmail(this.auth, email)
-      .then(() => {
-        resolve();
-      })
-      .catch((error: Error) => {
-        console.log(error);
+        .then(() => {
+          resolve();
+        })
+        .catch((error: Error) => {
+          console.log(error);
 
-        reject(error);
-      });
+          reject(error);
+        });
     });
+  }
+
+  checkEmailMatch(emailToCheck: string): boolean {
+    for (let i = 0; i < this.firestore.userlist.length; i++) {
+      let mail = this.firestore.userlist[i].email;
+      if (emailToCheck === mail) {
+        return true;
+      }
+    }
+    return false;
   }
 }
