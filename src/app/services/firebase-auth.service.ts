@@ -17,6 +17,7 @@ import {
   sendEmailVerification,
 } from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ import { FirestoreService } from './firestore.service';
 export class FirebaseAuthService {
   auth: Auth = inject(Auth);
   firestore = inject(FirestoreService);
+  // fauth = inject(AngularFireAuth)
 
   newUser: NewUser = {
     name: '',
@@ -43,7 +45,7 @@ export class FirebaseAuthService {
 
   emailExists: boolean = false;
 
-  constructor() {}
+  constructor(private afAuth: AngularFireAuth) {}
 
   updateUserImg(img: string) {
     this.newUser.photoURL = img;
@@ -154,6 +156,10 @@ export class FirebaseAuthService {
         });
     });
   }
+
+  // confirmPasswordReset(code: string, newPassword: string): Promise<void> {
+  //   return this.fauth.confirmPasswordReset(code, newPassword);
+  // }
 
   checkEmailMatch(emailToCheck: string): boolean {
     for (let i = 0; i < this.firestore.userlist.length; i++) {
