@@ -27,15 +27,15 @@ export class ResetPasswordComponent {
     });
   }
 
-  // resetPassword() {
-  //   if (this.newPassword.value === this.confirmPassword.value) {
-  //     this.auth.confirmPasswordReset(this.resetCode, this.newPassword.value!)
-  //     .then(() => {
-  //       console.log('erfolg');
-  //     })
-  //     .catch((error) => {
-  //       console.log('das hat nicht geklappt');
-  //     });
-  //   }
-  // }
+  resetPassword() {
+    if (this.newPassword.value === this.confirmPassword.value) {
+      this.auth.confirmPasswordReset(this.resetCode, this.newPassword.value!)
+      .then(() => {
+        console.log('erfolg');
+      })
+      .catch((error) => {
+        console.log('das hat nicht geklappt');
+      });
+    }
+  }
 }

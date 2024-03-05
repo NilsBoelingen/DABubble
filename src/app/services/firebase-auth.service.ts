@@ -11,10 +11,10 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  connectAuthEmulator,
   sendPasswordResetEmail,
-  confirmPasswordReset,
   sendEmailVerification,
+  confirmPasswordReset,
+  verifyPasswordResetCode,
 } from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -25,7 +25,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class FirebaseAuthService {
   auth: Auth = inject(Auth);
   firestore = inject(FirestoreService);
-  // fauth = inject(AngularFireAuth)
 
   newUser: NewUser = {
     name: '',
@@ -45,7 +44,7 @@ export class FirebaseAuthService {
 
   emailExists: boolean = false;
 
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor() {}
 
   updateUserImg(img: string) {
     this.newUser.photoURL = img;
@@ -157,9 +156,9 @@ export class FirebaseAuthService {
     });
   }
 
-  // confirmPasswordReset(code: string, newPassword: string): Promise<void> {
-  //   return this.fauth.confirmPasswordReset(code, newPassword);
-  // }
+  confirmPasswordReset(code: string, newPassword: string): Promise<void> {
+        return confirmPasswordReset(this.auth, code, newPassword);
+  }
 
   checkEmailMatch(emailToCheck: string): boolean {
     for (let i = 0; i < this.firestore.userlist.length; i++) {
