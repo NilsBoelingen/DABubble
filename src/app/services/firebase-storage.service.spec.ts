@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FirebaseSorageService } from './firebase-sorage.service';
+import { FirebaseSorageService } from './firebase-storage.service';
 
 describe('FirebaseSorageService', () => {
   let service: FirebaseSorageService;

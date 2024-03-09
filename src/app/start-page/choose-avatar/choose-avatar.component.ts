@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { FirebaseSorageService } from '../../services/firebase-sorage.service';
+import { FirebaseSorageService } from '../../services/firebase-storage.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
