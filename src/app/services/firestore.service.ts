@@ -24,7 +24,7 @@ export class FirestoreService {
     addDoc(collection(this.firestore, 'userlist'), user);
   }
 
-  suballUser() {
+  async suballUser() {
     onSnapshot(collection(this.firestore, 'userlist'), (list) => {
       this.userlist = [];
       list.forEach((obj) => {

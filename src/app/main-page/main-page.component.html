@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="profil-menu-trigger" mat-button [matMenuTriggerFor]="menu">
-    <h1>Name</h1>
-    <img src="assets/img/main-page/avatar_1.png" />
+    <h1>{{ auth.currentUser.firstName }}</h1>
+    <img src="{{ auth.currentUser.img }}" />
     <mat-icon>arrow_drop_down</mat-icon>
   </div>
   <mat-menu #menu="matMenu">

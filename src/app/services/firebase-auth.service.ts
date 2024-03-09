@@ -15,9 +15,11 @@ import {
   sendEmailVerification,
   confirmPasswordReset,
   verifyPasswordResetCode,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +46,7 @@ export class FirebaseAuthService {
 
   emailExists: boolean = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   updateUserImg(img: string) {
     this.newUser.photoURL = img;
@@ -83,13 +85,18 @@ export class FirebaseAuthService {
     this.firstName = names.join(' ');
   }
 
+  findUser(email: string) {
+    return this.firestore.userlist.find((user: any) => user.email === email);
+  }
+
   signIn(email: string, password: string) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        this.currentUser = user.toJSON();
+        this.currentUser = this.findUser(user.email!);
         this.loginMessage = 'Login erfolgreich!';
+        console.log(this.findUser(user.email!));
       })
       .catch((error) => {
         this.loginMessage = 'Email oder Passwort falsch!';
@@ -108,15 +115,12 @@ export class FirebaseAuthService {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential!.accessToken;
           const user = result.user;
-          this.currentUser = user.toJSON();
-          if (!this.checkEmailMatch(this.currentUser.email)) {
-            this.getSingleName(this.currentUser.displayName);
-            this.firestore.addUser(
-              this.currentUser,
-              this.firstName,
-              this.lastName
-            );
+          if (!this.checkEmailMatch(user.email!)) {
+            this.getSingleName(user.displayName);
+            this.firestore.addUser(user, this.firstName, this.lastName);
           }
+          this.currentUser = this.findUser(user.email!);
+          console.log(this.currentUser);
           this.loginMessage = 'Login erfolgreich!';
           resolve();
         })
@@ -157,7 +161,7 @@ export class FirebaseAuthService {
   }
 
   confirmPasswordReset(code: string, newPassword: string): Promise<void> {
-        return confirmPasswordReset(this.auth, code, newPassword);
+    return confirmPasswordReset(this.auth, code, newPassword);
   }
 
   checkEmailMatch(emailToCheck: string): boolean {
@@ -168,5 +172,23 @@ export class FirebaseAuthService {
       }
     }
     return false;
+  }
+
+  isUserLogin() {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.getSingleName(user.displayName);
+        this.currentUser = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: user.email,
+          img: user.photoURL,
+        };
+        console.log(this.currentUser);
+      } else {
+        this.currentUser = undefined;
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 }

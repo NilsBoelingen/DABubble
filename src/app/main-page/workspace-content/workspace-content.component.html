@@ -32,10 +32,12 @@
       <span><img src="assets/img/main-page/workspaces.png" /> Channels</span>
     </button>
     <div class="contacts">
+      @for (user of firestore.userlist; track $index) {
       <div>
-        <img src="assets/img/main-page/avatar_1.png" />
-        <span>Max Mustermann</span>
+        <img src="{{ user.img }}" />
+        <span>{{ user.firstname }} {{ user.lastname }}</span>
       </div>
+      }
     </div>
   </section>
 </body>

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-workspace-content',
@@ -12,6 +13,8 @@ import {FlatTreeControl} from '@angular/cdk/tree';
   styleUrl: './workspace-content.component.scss'
 })
 export class WorkspaceContentComponent {
+  firestore = inject(FirestoreService);
+
   channelsOpen: boolean = false;
   channelsArrow: string = 'arrow_right';
   contactsOpen: boolean = false;
