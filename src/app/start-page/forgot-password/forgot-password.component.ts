@@ -11,6 +11,8 @@ import {
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,6 +23,8 @@ import { DialogComponent } from '../dialog/dialog.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
+    CommonModule
   ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss',
@@ -33,6 +37,8 @@ export class ForgotPasswordComponent {
     Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}'),
   ]);
 
+  loading: boolean = false;
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   getEmailErrorMessage() {
@@ -44,6 +50,7 @@ export class ForgotPasswordComponent {
 
   sendMail() {
     if (this.email.valid) {
+      this.loading = true;
       this.auth
         .resetPassword(this.email.value!)
         .then(() => {
@@ -53,6 +60,7 @@ export class ForgotPasswordComponent {
           setTimeout(() => {
             this.auth.fromPasswords = false;
             this.dialog.closeAll();
+            this.loading = false;
             this.router.navigateByUrl('/login');
           }, 2000);
         })
