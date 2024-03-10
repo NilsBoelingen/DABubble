@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,20 +31,28 @@ export class MainPageComponent {
   auth = inject(FirebaseAuthService);
   firestore = inject(FirestoreService);
 
+  @ViewChild('workspaceMenuImg') workspaceMenuImg!: ElementRef;
+
   matCardWidth = 'calc(100% - 386px - 40px)';
   workspaceOpen = true;
+  workspaceMenuText = 'schließen'
 
   constructor(private router: Router) {
     this.auth.isUserLogin();
   }
 
   switchWorkspace() {
+    let img = this.workspaceMenuImg.nativeElement;
     if (this.workspaceOpen) {
+      img.style.rotate = '180deg';
       this.workspaceOpen = false;
       this.matCardWidth = 'calc(100% - 40px)';
+      this.workspaceMenuText = 'öffnen'
     } else {
+      img.style.rotate = '0deg';
       this.workspaceOpen = true;
       this.matCardWidth = 'calc(100% - 386px - 40px)';
+      this.workspaceMenuText = 'schließen'
     }
   }
 

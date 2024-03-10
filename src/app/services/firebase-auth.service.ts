@@ -96,7 +96,6 @@ export class FirebaseAuthService {
         const user = userCredential.user;
         this.currentUser = this.findUser(user.email!);
         this.loginMessage = 'Login erfolgreich!';
-        console.log(this.findUser(user.email!));
       })
       .catch((error) => {
         this.loginMessage = 'Email oder Passwort falsch!';
@@ -184,7 +183,6 @@ export class FirebaseAuthService {
           email: user.email,
           img: user.photoURL,
         };
-        console.log(this.currentUser);
       } else {
         this.currentUser = undefined;
         this.router.navigateByUrl('/login');

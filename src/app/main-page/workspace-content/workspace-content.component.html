@@ -17,7 +17,9 @@
       </button>
     </div>
     <div class="channels">
-      <button>#Entwicklerteam</button>
+      @for (channel of firestore.channellist; track $index) {
+      <button [ngClass]="{'btn-active': activeChannel === $index}" (click)="chnageActiveChannel($index)">#{{ channel.name }}</button>
+      }
     </div>
     <div class="create-channel">
       <button>
@@ -33,7 +35,7 @@
     </button>
     <div class="contacts">
       @for (user of firestore.userlist; track $index) {
-      <div>
+      <div [ngClass]="{'btn-active': activeUser === $index}" (click)="chnageActiveUser($index)">
         <img src="{{ user.img }}" />
         <span>{{ user.firstName }} {{ user.lastName }}</span>
       </div>

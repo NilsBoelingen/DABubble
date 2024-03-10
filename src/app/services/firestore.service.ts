@@ -9,9 +9,11 @@ export class FirestoreService {
   firestore: Firestore = inject(Firestore);
 
   userlist: any = [];
+  channellist: any = [];
 
   constructor() {
     this.suballUser();
+    this.subAllChannels();
   }
 
   addUser(newUser: any, firstName: string, lastName: string) {
@@ -30,6 +32,16 @@ export class FirestoreService {
       list.forEach((obj) => {
         let user = obj.data();
         this.userlist.push(user)
+      });
+    });
+  }
+
+  subAllChannels() {
+    onSnapshot(collection(this.firestore, 'channels'), (list) => {
+      this.channellist = [];
+      list.forEach((obj) => {
+        let channel = obj.data();
+        this.channellist.push(channel);
       });
     });
   }

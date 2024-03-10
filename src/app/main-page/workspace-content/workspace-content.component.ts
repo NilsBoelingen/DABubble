@@ -4,11 +4,12 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { FirestoreService } from '../../services/firestore.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-workspace-content',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatTreeModule],
+  imports: [MatIconModule, MatButtonModule, MatTreeModule, NgClass],
   templateUrl: './workspace-content.component.html',
   styleUrl: './workspace-content.component.scss'
 })
@@ -19,6 +20,9 @@ export class WorkspaceContentComponent {
   channelsArrow: string = 'arrow_right';
   contactsOpen: boolean = false;
   contactsArrow: string = 'arrow_right';
+
+  activeChannel: number | null = null;
+  activeUser: number | null = null;
 
   switchChannels() {
     if (this.channelsOpen) {
@@ -37,6 +41,22 @@ export class WorkspaceContentComponent {
     } else {
       this.contactsOpen = true;
       this.contactsArrow = 'arrow_drop_down';
+    }
+  }
+
+  chnageActiveChannel(i: number) {
+    if (this.activeChannel === i) {
+      this.activeChannel = null;
+    } else {
+      this.activeChannel = i;
+    }
+  }
+
+  chnageActiveUser(i: number) {
+    if (this.activeUser === i) {
+      this.activeUser = null;
+    } else {
+      this.activeUser = i;
     }
   }
 

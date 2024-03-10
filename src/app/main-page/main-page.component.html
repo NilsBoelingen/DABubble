@@ -29,7 +29,7 @@
 <body>
   <section class="workspace-container">
     <button (click)="switchWorkspace()">
-      Workspace-Menü schließen <img src="assets/img/main-page/Group 2.png" />
+      Workspace-Menü {{ workspaceMenuText }} <img src="assets/img/main-page/Group 2.png" #workspaceMenuImg />
     </button>
     <div class="workspace-content-container" *ngIf="workspaceOpen">
       <mat-card>
