@@ -20,22 +20,22 @@
       <button>#Entwicklerteam</button>
     </div>
     <div class="create-channel">
-      <button mat-icon-button>
+      <button>
         <mat-icon>add_circle</mat-icon>
-        <span>Channel hinzufügen</span>
+        Channel hinzufügen
       </button>
     </div>
   </section>
   <section class="contacts-container">
     <button (click)="switchContacts()">
       <mat-icon>{{ contactsArrow }}</mat-icon>
-      <span><img src="assets/img/main-page/workspaces.png" /> Channels</span>
+      <span><img src="assets/img/main-page/account_circle.png" /> Channels</span>
     </button>
     <div class="contacts">
       @for (user of firestore.userlist; track $index) {
       <div>
         <img src="{{ user.img }}" />
-        <span>{{ user.firstname }} {{ user.lastname }}</span>
+        <span>{{ user.firstName }} {{ user.lastName }}</span>
       </div>
       }
     </div>
